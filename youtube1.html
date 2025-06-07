@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>youtube</title>
+   
+    <style>
+       p{
+        font-family: Arial;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+      .thumbnail{
+       width: 100%;
+       
+      }
+      
+      .video-title{
+        margin-top: 0;
+        font-family: Arial;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 20px;
+        margin-bottom: 10px;
+
+      }
+      .search-bar {
+      display: block;
+      }
+      
+      .video-info-grid{
+        display:grid;
+        grid-template-columns: 50px 1fr;
+      }
+     
+      .profile-picture{
+        width:36px;
+        border-radius:50px ;
+
+       
+
+      }
+      .thumbnail-row {
+      margin-bottom: 8px;
+      position: relative;
+      
+     }
+     .video-author,
+     .video-stats{
+      font-size: 15px;
+      color: rgb(80, 70, 70);
+      
+
+     }
+     .video-author {
+      margin-bottom:4px;
+     }
+     .video-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      column-gap: 16px;
+      row-gap:40px ;
+
+     }
+     @media (max-width:600px){
+      .video-grid{
+        grid-template-columns: 1fr 1fr;
+      }
+     }
+   
+     body{
+      padding-bottom: 100px;
+      margin:0;
+      padding-top: 80px;
+      padding-left: 80px;
+      padding-left: 96px;
+      padding-right: 24px;
+      background-color: rgb(248, 248, 248);
+
+     }
+     .header{
+      height: 55px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      position: fixed;
+      top: 0;
+      left:0;
+      right:0;
+      z-index:100;
+
+
+      background-color: white;
+      border-bottom-width:1px ;
+      border-bottom-style: solid;
+      border-bottom-color:rgb(228, 228, 228);
+     
+     
+
+
+     }
+     .left-section{
+     display:flex;
+     align-items: center;
+     }
+     .middle-section{
+      flex: 1;
+      margin-left:70px;
+      margin-right: 35px;
+      max-width:500px;
+      display:flex;
+      align-items: center;
+
+     }
+     .search-bar{
+     
+      flex:1;
+      height: 36px;
+      padding-left: 10px;
+      font-size:16px ;
+      border:1px solid rgb(192, 192, 192);
+      border-radius: 2px;
+      box-shadow: inset 1px 2px 3px rgba(0,0,0,0.05);
+      width: 0;
+
+     }
+     .search-bar::placeholder{
+      font-family: Arial;
+      font-size: 16px;
+
+
+     }
+     .search-button{
+      height:40px;
+    width: 66px;
+    background-color: rgb(240, 240, 240);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(192, 192, 192);
+    margin-left: -1px;
+    margin-right: 10px;
+
+  
+   
+    
+     }
+     .search-button,
+     .voice-search-button,
+     .upload-icon-container,
+     .youtube-icon-container,
+     .notifications-hov{
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+
+     }
+     .search-button .tooltip,
+     .voice-search-button .tooltip,
+     .upload-icon-container .tooltip,
+     .youtube-icon-container .tooltip,
+     .notifications-hov .tooltip{
+      position: absolute;
+      background-color: grey;
+      color: white;
+      padding-top: 4px;
+      padding-bottom: 4px;
+      padding-left: 8px;
+      padding-right: 8px;
+      border-radius: 2px;
+      font-size: 12px;
+      bottom:-30px;
+      opacity: 0;
+      transition: opacity 0.15s;
+      pointer-events: none;
+      white-space: nowrap;
+
+    
+     }
+     .search-button:hover .tooltip,
+     .voice-search-button:hover .tooltip,
+     .upload-icon-container:hover .tooltip,
+     .youtube-icon-container:hover .tooltip,
+     .notifications-hov:hover .tooltip{
+      font-family: arial;
+      opacity:1;
+     }
+     .search-icon{
+      height:25px;
+     
+     }
+     .voice-search-button{
+      height:40px;
+      width:40px;
+      border-radius: 20px;
+      border: none;
+      background-color:rgb(245, 245, 245) ;
+     }
+     .voice-search-icon{
+      height:20px;
+     
+     
+
+     }
+     .right-section{
+      
+      margin-right: 20px;
+      width: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+
+
+     }
+     .upload-icon{
+      height:24px;
+      
+     }
+     .youtube-apps-icon{
+      height:24px
+  
+     }
+     .notification-icon{
+      height: 24px;
+
+     }
+     .notifications-icon-container{
+      position:relative;
+
+
+     }
+     .notifications-count{
+      position: absolute;
+      top:-2px;
+      right:-5px;
+      background-color: rgb(239, 36, 36);
+      color:white;
+      font-family: arial;
+      font-size: 11px;
+      padding-left: 5px;
+      padding-right:5px ;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      border-radius: 10px;
+      
+   
+
+
+     }
+     .current-user-pic{
+      height: 32px;
+      border-radius: 16px;
+
+     }
+
+     .hamburge-menu{
+      height:24px;
+      margin-left: 24px;
+      margin-right: 24px;
+
+     }
+     .youtube-logo{
+      height:24px;
+     }
+
+     .sidebar{
+      position: fixed;
+      left:0;
+      bottom:0;
+      top:55px;
+      background-color: white;
+      width:72px;
+      z-index: 200;
+      padding-top: 5px;
+
+
+     }
+     .sidebar-link{
+      
+      height: 74px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      cursor: pointer;
+
+
+     }
+     .sidebar-link:hover{
+      background-color: rgb(235, 235, 235);
+
+
+     }
+     .sidebar-link img{
+      height:24px;
+      margin-bottom: 4px;
+     
+     }
+     .sidebar-link div{
+      font-family: arial;
+      font-size: 10px;
+
+
+     }
+     .video-time{
+      background-color: black;
+      color: white;
+      position: absolute;
+      bottom:8px;
+      right: 5px;
+      font-family: arial;
+      font-size: 12px;
+      font-weight:bold;
+      padding: 4px;
+      border-radius: 2px;
+
+
+     }
+     /* this is style*/
+
+    </style>
+  </head>
+  <body>
+
+    <header class="header">
+      <div class="left-section">
+       <img class="hamburge-menu" src="intro-to-html\icons\icon-1.svg">
+        <img class="youtube-logo" src="intro-to-html\icons\youtube-logo.svg">
+    </div>
+  
+
+    <div class="middle-section">
+        <input class="search-bar" type="text"
+      placeholder="search"> 
+      <button class="search-button">
+        <img class="search-icon" src="intro-to-html\icons\search.svg">
+        <div class="tooltip">Search</div>
+      </button>
+       <!-- put position absolute inside position reletive-->
+      <button class="voice-search-button">
+        <img class="voice-search-icon" src="intro-to-html\icons\voice-search-icon.svg">
+        <div class="tooltip">Search with tour voice</div>
+      </button>
+      </div>
+
+
+      <div class="right-section">
+      <div class="upload-icon-container">
+        <img class="upload-icon" src="intro-to-html\icons\upload.svg">
+        <div class="tooltip">Create</div>
+      </div>
+
+      <div class="youtube-icon-container">
+        <img class="youtube-apps-icon" src="intro-to-html\icons\youtube-apps.svg">
+          <div class="tooltip">YouTube Apps</div>
+      </div>
+      <div class="notifications-hov">
+       <div class="notifications-icon-container">
+        <img class="notification-icon" src="intro-to-html\icons\notifications.svg">
+         <div class="tooltip">Notifications</div>
+      </div>
+      
+      
+        <div class="notifications-count">3</div>
+      </div>
+      <img class="current-user-pic" src="intro-to-html\icons\Durga.jpg">
+      
+    </div>
+  </header>
+
+
+  <nav class="sidebar">
+    <div class="sidebar-link">
+      <img src="intro-to-html\icons\home.svg">
+      <div>Home</div>
+    </div>
+    <div class="sidebar-link">
+      <img src="intro-to-html\icons\explore.svg">
+       <div>Explore</div>
+    </div>
+    <div class="sidebar-link">
+      <img src="intro-to-html\icons\subscriptions.svg">
+       <div>Subscriptions</div>
+    </div>
+    <div class="sidebar-link">
+      <img src="intro-to-html\icons\originals.svg">
+       <div>Originals</div>
+
+    </div>
+    <div class="sidebar-link">
+      <img src="intro-to-html\icons\youtube-music.svg">
+       <div>YouTube Music</div>
+    </div>
+    <div class="sidebar-link">
+      <img src="intro-to-html\icons\library.svg">
+       <div>Library</div>
+    </div>
+  </nav>
+
+
+  <main>
+     <section class="video-grid">
+<div class="video-preview">
+
+      <div class="thumbnail-row">
+        <a href="https://www.youtube.com/watch?v=G3e-cpL7ofc&pp=ygUYaHRtbCBhbmQgY3NzIGZ1bGwgY291cnNl"><img class="thumbnail" src="intro-to-html\thumbnails\thumbnail1.jpg" ></a>
+        <div class="video-time">6:31:24</div>
+      </div>
+      <div class="video-info-grid">
+
+        <div class="channel-picture">
+          <img class="profile-picture" src="intro-to-html\thumbnails\channel-pictures\dev.jpg">
+        </div>
+
+        <div class="video-info">
+          <p class="video-title">
+      HTML & CSS Full Course - Beginner to Pro
+    </p>
+
+    <p class="video-author">
+      SuperSimpleDev
+     </p>
+    <p class="video-stats">
+      14M views &#183; 3 years ago
+    </p>
+    
+    </div>
+       </div>
+      </div>
+
+
+
+       <div class="video-preview">
+
+      <div class="thumbnail-row">
+       <a href="https://www.youtube.com/watch?v=3V5LaqHqh4c&t=4s&pp=ygUMY2F0aGVyaW5lIGxp"> <img class="thumbnail" src="intro-to-html\thumbnails\thumbnail-2.jpg" ></a>
+        <div class="video-time">11:27</div>
+      </div>
+      <div class="video-info-grid">
+
+        <div class="channel-picture">
+          <img class="profile-picture" src="intro-to-html\thumbnails\channel-pictures\katherin.jpg">
+        </div>
+    
+
+        <div class="video-info">
+          <p class="video-title">
+    How I'd learn to code if I had to start over
+    </p>
+     <p class="video-author">
+      Catherine Li
+      
+
+     </p>
+    <p class="video-stats">
+     236K views  &#183; 4 months ago
+    </p>
+
+    
+        </div>
+        
+        
+       </div>
+      </div>
+
+      
+       
+    <div class="video-preview">
+
+      <div class="thumbnail-row">
+        <a href="https://www.youtube.com/watch?v=Sv-C54qahK8&pp=ygUPcHJpeWFua2EgY2hvcHJh"><img class="thumbnail" src="intro-to-html\thumbnails\thumbnail-3.jpg" ></a>
+        <div class="video-time">5:08</div>
+      </div>
+      <div class="video-info-grid">
+
+        <div class="channel-picture">
+          <img class="profile-picture" src="intro-to-html\thumbnails\channel-pictures\inspiration.jpg">
+        </div>
+
+        <div class="video-info">
+          <p class="video-title">
+      
+How CONFIDENCE can Change your Life - Priyanka Chopra Jonas
+
+    </p>
+
+    <p class="video-author">
+      Seek Inspiration
+
+     </p>
+    <p class="video-stats">
+      6.5M views &#183; 5 years ago
+    </p>
+    
+    </div>
+       </div>
+      </div>
+
+
+
+       <div class="video-preview">
+
+      <div class="thumbnail-row">
+        <a href="https://www.youtube.com/watch?v=SGDS6NFN-_U&t=15s&pp=ygURamVubnkgbGVjdHVyZSBkc2E%3D"><img class="thumbnail" src="intro-to-html\thumbnails\thumbnail-4.jpg" ></a>
+        <div class="video-time">46:26</div>
+      </div>
+      <div class="video-info-grid">
+
+        <div class="channel-picture">
+          <img class="profile-picture" src="intro-to-html\thumbnails\channel-pictures\jenny.jpg">
+        </div>
+    
+
+        <div class="video-info">
+          <p class="video-title">
+    Introduction to Data Structure and Algorithm | DSA Placement Course
+    </p>
+     <p class="video-author">
+      Jenny's Lectures CS IT
+
+     </p>
+    <p class="video-stats">
+      14K views  &#183; 5 days ago
+    </p>
+    
+    
+        </div>
+        
+        
+       </div>
+      </div>
+
+      
+     <div class="video-preview">
+
+      <div class="thumbnail-row">
+       <a href="https://www.youtube.com/watch?v=_kbyhlUPiHE&t=29s&pp=ygUMaGFyc2hhIHZlcnNl"> <img class="thumbnail" src="intro-to-html\thumbnails\thumbnail-5.jpg" ></a>
+        <div class="video-time">14:13</div>
+      </div>
+      <div class="video-info-grid">
+
+        <div class="channel-picture">
+          <img class="profile-picture" src="intro-to-html\thumbnails\channel-pictures\harsha.jpg">
+        </div>
+
+        <div class="video-info">
+          <p class="video-title">
+      6 Month Roadmap To Crack any Service Based Company 
+    </p>
+
+     <p class="video-author">
+      
+Harsha Verse
+
+     </p>
+    <p class="video-stats">
+      13k views  &#183; 1 month ago
+    </p>
+   
+    </div>
+       </div>
+      </div>
+
+
+
+       <div class="video-preview">
+
+      <div class="thumbnail-row">
+       <a href="https://www.youtube.com/watch?v=GAlRLwyEJIU&pp=ygUHbXIgYmVhbg%3D%3D"> <img class="thumbnail" src="intro-to-html\thumbnails\thumbnail-6.jpg" ></a>
+        <div class="video-time">25:44</div>
+      </div>
+      <div class="video-info-grid">
+
+        <div class="channel-picture">
+          <img class="profile-picture" src="intro-to-html\thumbnails\channel-pictures\bean.jpg">
+        </div>
+    
+
+        <div class="video-info">
+          <p class="video-title">
+    The Bean Test | Funny Episodes | Mr Bean Official
+    </p>
+    
+    <p class="video-author">
+      
+Mr Bean
+
+    <p class="video-stats">
+      43M views   &#183; 5 years ago
+    </p>
+   
+    
+        </div>
+        
+        
+       </div>
+      </div>
+
+
+      <div class="video-preview">
+
+      <div class="thumbnail-row">
+       <a href="https://www.youtube.com/watch?v=zgaCZOQCpp8&pp=ygUQZGllIHdpdGggYSBzbWlsZQ%3D%3D"> <img class="thumbnail" src="intro-to-html\thumbnails\thumbnail-7.jpg" ></a>
+        <div class="video-time">4:10</div>
+      </div>
+      <div class="video-info-grid">
+
+        <div class="channel-picture">
+          <img class="profile-picture" src="intro-to-html\thumbnails\channel-pictures\yung.jpg">
+        </div>
+
+        <div class="video-info">
+          <p class="video-title">
+      Lady Gaga, Bruno Mars - Die With A Smile (Lyrics)
+    </p>
+
+    <p class="video-author">
+     7clouds
+     </p>
+    <p class="video-stats">
+      194M views &#183; 6 months ago
+    </p>
+    
+    </div>
+       </div>
+      </div>
+
+
+      <div class="video-preview">
+
+      <div class="thumbnail-row">
+     <a href="https://www.youtube.com/watch?v=9iMGFqMmUFs&pp=ygUaYmVuZWZpdHMgb2YgZHJpbmtpbmcgd2F0ZXI%3D"> <img class="thumbnail" src="intro-to-html\thumbnails\thumbnail-8.jpg" ></a>
+        <div class="video-time">1:27</div>
+      </div>
+      <div class="video-info-grid">
+
+        <div class="channel-picture">
+          <img class="profile-picture" src="intro-to-html\thumbnails\channel-pictures\water.jpg">
+        </div>
+
+        <div class="video-info">
+          <p class="video-title">
+         Benefits of Drinking Water
+ 
+    </p>
+
+    <p class="video-author">
+      INTEGRIS Health
+
+     </p>
+    <p class="video-stats">
+      169k views &#183; 3 years ago
+    </p>
+    
+    </div>
+       </div>
+      </div>
+
+
+       <div class="video-preview">
+
+      <div class="thumbnail-row">
+       <a href="https://www.youtube.com/watch?v=vxwhgKWTLkM&pp=ygUGZHIgcGFs"> <img class="thumbnail" src="intro-to-html\thumbnails\thumbnail-9.jpg" ></a>
+        <div class="video-time">7:11</div>
+      </div>
+      <div class="video-info-grid">
+
+        <div class="channel-picture">
+          <img class="profile-picture" src="intro-to-html\thumbnails\channel-pictures\pal.jpg">
+        </div>
+    
+
+        <div class="video-info">
+          <p class="video-title">
+    Daily Habits That Sharpen Your Brain
+    </p>
+    </p>
+    <p class="video-author">
+      
+Dr Pal
+
+    <p class="video-stats">
+      357k views   &#183; 3 weeks ago
+    </p>
+   
+    
+        </div>
+        
+        
+       </div>
+      </div>
+
+
+
+
+      
+
+
+
+
+     </section>
+
+  </main>
+     
+
+  </body>
+</html>
